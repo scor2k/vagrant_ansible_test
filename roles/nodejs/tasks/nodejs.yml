@@ -1,8 +1,17 @@
 ---
 # Install nodejs 
 
+- name: Import Node GPG key
+  apt_key:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
+    id: "68576280"
+    state: present
+  become: true
+
 - name: Add Repository for 6.x 
-  shell: 'curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -'
+  apt_repository:
+    repo: deb https://deb.nodesource.com/node_6.x xenial main
+    state: present
   become: true
 
 - name: Install nodejs
