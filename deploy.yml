@@ -1,0 +1,6 @@
+---
+# Main playbook to deploy
+
+- hosts: nodejs
+  roles:
+    - nodejs
