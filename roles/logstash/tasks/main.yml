@@ -1,0 +1,25 @@
+---
+# Java8
+
+- name: Install Logstash (repository added with filebeat already!)
+  apt:
+    name: logstash
+    state: present
+  become: true
+
+- name: Copy config
+  copy:
+    src: ../files/default.conf
+    dest: /etc/logstash/conf.d/default.conf
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Restart service
+  service:
+    name: logstash
+    state: restarted
+  become: true
+  

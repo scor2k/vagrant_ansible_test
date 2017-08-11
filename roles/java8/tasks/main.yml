@@ -1,0 +1,8 @@
+---
+# Java8
+
+- name: Install Java8
+  apt:
+    name: openjdk-8-jre-headless
+    state: present
+  become: true

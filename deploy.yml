@@ -1,9 +1,11 @@
 ---
 # Main playbook to deploy
 
-- hosts: nodejs
+# install nodejs and filebeat to the all nodes
+- hosts: all
   roles:
     - nodejs
+    - filebeat
 
 - hosts: mysql-master
   roles:
@@ -12,4 +14,11 @@
 - hosts: mysql-slave
   roles:
     - percona-slave
+
+
+# install logstash to the node3
+- hosts: logstash
+  roles:
+    - java8
+    - logstash
 
