@@ -4,3 +4,12 @@
 - hosts: nodejs
   roles:
     - nodejs
+
+- hosts: mysql-master
+  roles:
+    - percona-master
+
+- hosts: mysql-slave
+  roles:
+    - percona-slave
+
