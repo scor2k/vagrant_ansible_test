@@ -1,5 +1,5 @@
 ---
-# Java8
+# 
 
 - name: Install Logstash (repository added with filebeat already!)
   apt:

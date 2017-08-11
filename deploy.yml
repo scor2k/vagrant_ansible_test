@@ -6,19 +6,24 @@
   roles:
     - nodejs
     - filebeat
+    - java8
 
+# install master node for percona
 - hosts: mysql-master
   roles:
     - percona-master
 
+# install slave node for percona
 - hosts: mysql-slave
   roles:
     - percona-slave
 
-
 # install logstash to the node3
 - hosts: logstash
   roles:
-    - java8
     - logstash
 
+# install two elastic node
+- hosts: elasticsearch
+  roles:
+    - elasticsearch

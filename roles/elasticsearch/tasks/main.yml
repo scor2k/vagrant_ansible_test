@@ -1,0 +1,37 @@
+---
+# 
+
+- name: Install Elasticsearch
+  apt:
+    name: elasticsearch
+    state: present
+  become: true
+
+- name: Reduce memory for java Xms
+  replace:
+    dest: /etc/elasticsearch/jvm.options
+    regexp: '^-Xms.*$'
+    replace: '-Xms128m'
+  become: true
+
+- name: Reduce memory for java Xmx
+  replace:
+    dest: /etc/elasticsearch/jvm.options
+    regexp: '^-Xmx.*$'
+    replace: '-Xmx128m'
+  become: true
+
+- name: Public service for 0.0.0.0
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    regexp: '^network\.host'
+    line: 'network.host: 0.0.0.0'
+  become: true
+
+
+- name: Restart service
+  service:
+    name: elasticsearch
+    state: restarted
+  become: true
+  
