@@ -21,17 +21,21 @@
     replace: '-Xmx128m'
   become: true
 
-- name: Public service for 0.0.0.0
-  lineinfile:
+- name: Copy config
+  copy:
+    src: ../files/elasticsearch.yml
     dest: /etc/elasticsearch/elasticsearch.yml
-    regexp: '^network\.host'
-    line: 'network.host: 0.0.0.0'
+    force: yes
+    owner: root
+    group: elasticsearch
+    mode: 0660
   become: true
 
 
 - name: Restart service
   service:
     name: elasticsearch
+    enabled: yes
     state: restarted
   become: true
   

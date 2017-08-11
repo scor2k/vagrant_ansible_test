@@ -33,6 +33,7 @@
 - name: Restart service
   service:
     name: filebeat
+    enabled: yes
     state: restarted
   become: true
 

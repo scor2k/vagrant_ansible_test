@@ -23,7 +23,12 @@
   roles:
     - logstash
 
-# install two elastic node
-- hosts: elasticsearch
+# install elastic node
+- hosts: all
   roles:
     - elasticsearch
+
+# install kibana
+- hosts: kibana
+  roles:
+    - kibana

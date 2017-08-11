@@ -1,4 +1,22 @@
 ---
-# 
+# Install nodejs 
 
-- include: nodejs.yml
+- name: Import Node GPG key
+  apt_key:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
+    id: "68576280"
+    state: present
+  become: true
+
+- name: Add Repository for 6.x 
+  apt_repository:
+    repo: deb https://deb.nodesource.com/node_6.x xenial main
+    state: present
+  become: true
+
+- name: Install nodejs
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes
+  become: true

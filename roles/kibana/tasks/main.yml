@@ -1,25 +1,26 @@
 ---
 # 
 
-- name: Install Logstash (repository added with filebeat already!)
+- name: Install Kibana
   apt:
-    name: logstash
+    name: kibana
     state: present
   become: true
 
 - name: Copy config
   copy:
-    src: ../files/default.conf
-    dest: /etc/logstash/conf.d/default.conf
+    src: ../files/kibana.yml
+    dest: /etc/kibana/kibana.yml
     force: yes
     owner: root
     group: root
     mode: 0644
   become: true
 
+
 - name: Restart service
   service:
-    name: logstash
+    name: kibana
     enabled: yes
     state: restarted
   become: true
