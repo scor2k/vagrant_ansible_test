@@ -16,30 +16,3 @@
  
 На этом же кластере организовать сбор логов процессов при помощи logstash и kibana.
 
-
-### Scheme
-
-#### node1
-
-  - filebeat
-  - mysql percona db master
-  - nodejs
-  - elasticsearch
-
-#### node2
-
-  - filebeat
-  - mysql percona db slave
-  - nodejs
-  - elasticsearch
-
-#### node3
-
-  - filebeat
-  - nodejs
-  - elasticsearch like balancer
-  - logstash
-  - kibana
-  - HAproxy
-
-
