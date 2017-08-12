@@ -1,9 +1,12 @@
 ---
 # 
 
-- name: Stop if already running
-  shell: "forever stop app_{{ app_port }}"
+- name: Run service
+  service:
+    name: app_{{ app_port }} 
+    state: stopped
   ignore_errors: yes
+  become: true
 
 - name: Create application folder
   file: path={{ ansible_env.HOME }}/app_{{ app_port }}  state=directory
@@ -27,7 +30,15 @@
   npm: path={{ ansible_env.HOME }}/app_{{ app_port }} state=present
 
 
-# Start instance
-- name: Start instance
-  shell: "PORT={{ app_port }} MYSQL=mysql://test:Qwerty123@172.16.0.103/mysql ELASTIC=http://172.16.0.103:9200 forever --sourceDir {{ ansible_env.HOME }}/app_{{ app_port }} start --uid='app_{{ app_port }}' --append status.js"
-  
+# Install as service
+- name: Install service for autorun
+  shell: "forever-service install app_{{ app_port }} -e 'PORT={{ app_port }} MYSQL=mysql://test:Qwerty123@172.16.0.103/mysql ELASTIC=http://172.16.0.103:9200' --script {{ ansible_env.HOME }}/app_{{ app_port }}/status.js  "
+  become: true
+
+# Run
+- name: Run service
+  service:
+    name: app_{{ app_port }} 
+    state: started
+  become: true
+
