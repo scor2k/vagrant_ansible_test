@@ -46,16 +46,6 @@
   become: true
 
 
-- name: Config Kibana
-  copy:
-    src: ../files/kibana.conf
-    dest: /etc/nginx/sites-enabled/kibana.conf
-    force: yes
-    owner: root
-    group: root
-    mode: 0644
-  become: true
-
 - name: Restart service
   service:
     name: nginx

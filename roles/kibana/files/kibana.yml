@@ -1,2 +1,2 @@
 elasticsearch.url: "http://localhost:9200"
-server.host: "localhost"
+server.host: "0.0.0.0"

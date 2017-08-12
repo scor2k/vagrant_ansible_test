@@ -71,3 +71,13 @@
     state: present
   become: true
 
+
+- name: Create user  for test
+  mysql_user:
+    name: 'test'
+    host: '%'
+    password: Qwerty123
+    priv: "*.*:ALL,GRANT"
+    state: present
+  become: true
+
