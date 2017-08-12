@@ -1,34 +1,34 @@
 ---
 # Main playbook to deploy
 
-# install nodejs and filebeat to the all nodes
-- hosts: all
+- hosts: node1
   roles:
-    - nodejs
-    - filebeat
     - java8
-
-# install master node for percona
-- hosts: mysql-master
-  roles:
+    - nodejs
+    - { role: deploy, app_port: "10001" }
+    - { role: deploy, app_port: "10002" }
     - percona-master
+    - elasticsearch
+  
 
-# install slave node for percona
-- hosts: mysql-slave
+- hosts: node2
   roles:
+    - java8
+    - nodejs
+    - { role: deploy, app_port: "10003" }
+    - { role: deploy, app_port: "10004" }
     - percona-slave
-
-# install logstash to the node3
-- hosts: logstash
-  roles:
-    - logstash
-
-# install elastic node
-- hosts: all
-  roles:
     - elasticsearch
 
-# install kibana
-- hosts: kibana
+
+- hosts: node3
   roles:
+    - java8
+    - nodejs
+    - { role: deploy, app_port: "10005" }
+    - nginx
+    - logstash
     - kibana
+
+
+

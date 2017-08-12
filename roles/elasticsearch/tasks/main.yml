@@ -1,6 +1,18 @@
 ---
 # 
 
+- name: Import Elastic GPG key
+  apt_key:
+    url: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  become: true
+
+- name: Add Repository for Elastic
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
+    state: present
+  become: true
+
 - name: Install Elasticsearch
   apt:
     name: elasticsearch

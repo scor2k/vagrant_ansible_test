@@ -1,0 +1,33 @@
+---
+# 
+
+- name: Stop if already running
+  shell: "forever stop app_{{ app_port }}"
+  ignore_errors: yes
+
+- name: Create application folder
+  file: path={{ ansible_env.HOME }}/app_{{ app_port }}  state=directory
+
+- name: Copy package.json
+  copy:
+    src: ../files/package.json
+    dest: "{{ ansible_env.HOME }}/app_{{ app_port }}/package.json"
+    force: yes
+    mode: 0644
+
+- name: Copy status.js
+  copy:
+    src: ../files/status.js
+    dest: "{{ ansible_env.HOME }}/app_{{ app_port }}/status.js"
+    force: yes
+    mode: 0644
+
+# NPM INSTLAL
+- name: Npm install
+  npm: path={{ ansible_env.HOME }}/app_{{ app_port }} state=present
+
+
+# Start instance
+- name: Start instance
+  shell: "PORT={{ app_port }} MYSQL=mysql://test:Qwerty123@172.16.0.103/mysql ELASTIC=http://172.16.0.103:9200 forever --sourceDir {{ ansible_env.HOME }}/app_{{ app_port }} start --uid='app_{{ app_port }}' --append status.js"
+  

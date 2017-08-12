@@ -1,0 +1,27 @@
+{
+  "name": "test-process",
+  "version": "0.1.0",
+  "author": "Team of Good People",
+
+  "description": "Infrastructure test process",
+
+  "main": "status.js",
+
+  "scripts": {
+    "start": "node -r dotenv/config status.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "dependencies": {
+    "dotenv": "~4.0",
+
+    "mysql": "~2.13",
+    "elasticsearch": "~13.0"
+  },
+
+  "engines": {
+    "node": ">= 6.10"
+  },
+
+  "private": true
+}

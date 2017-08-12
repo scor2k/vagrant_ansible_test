@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 
   # Configure vm
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--cpus", "4", "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--cpus", "4", "--memory", "1500"]
   end
 
 
@@ -65,6 +65,7 @@ Vagrant.configure("2") do |config|
     node3.vm.hostname = "node3"
 
     node3.vm.network "forwarded_port", guest: 5601, host: 5601
+    node3.vm.network "forwarded_port", guest: 80, host: 80 
 
     node3.vm.provision "shell", inline: <<-SHELL
       sudo apt install -y python > /dev/null 2> /dev/null
