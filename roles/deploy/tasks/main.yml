@@ -1,7 +1,7 @@
 ---
 # 
 
-- name: Run service
+- name: Stop service
   service:
     name: app_{{ app_port }} 
     state: stopped

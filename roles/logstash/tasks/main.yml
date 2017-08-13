@@ -19,15 +19,33 @@
     state: present
   become: true
 
-- name: Copy config
+- name: Add logstash to ADM group logs reading access
+  user: 
+    name: logstash
+    append: yes
+    groupd: adm
+  become: true
+
+- name: Copy config 
   copy:
-    src: ../files/default.conf
-    dest: /etc/logstash/conf.d/default.conf
+    src: ../files/nginx.conf
+    dest: /etc/logstash/conf.d/nginx.conf
     force: yes
     owner: root
     group: root
     mode: 0644
   become: true
+
+- name: Copy Template
+  copy:
+    src: ../files/nginx
+    dest: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-patterns-core-4.1.1/patterns/nginx
+    force: yes
+    owner: logstash
+    group: logstash
+    mode: 0644
+  become: true
+
 
 - name: Restart service
   service:
