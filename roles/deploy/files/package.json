@@ -15,7 +15,7 @@
   "dependencies": {
     "dotenv": "~4.0",
 
-    "mysql": "~2.13",
+    "mysql": "~2.18",
     "elasticsearch": "~13.0"
   },
 
